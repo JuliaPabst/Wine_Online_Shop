@@ -1,17 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const Wine = require("../models/Wine");
+const User = require("../models/User");
 
-
-router.get("/wines", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
-    const wines = await Wine.find();
-    res.json(wines);
+    const users = await User.find();
+    res.json(users);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
-
-
 
 module.exports = router;
