@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
 const productInOrderSchema = new mongoose.Schema({
-  Wine_ID: Number,
-  Order_ID: Number,
+  Wine_ID: String,
+  Order_ID: String,
   createdAt: Date,
   updatedAt: Date,
 });
