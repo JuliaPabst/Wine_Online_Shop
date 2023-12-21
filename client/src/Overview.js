@@ -22,10 +22,10 @@ export default function Overview() {
       <Row className="justify-content-md-center">
         {wines.map((wine) => (
           <Col xs="12" lg="4">
-            <p>
-              Hi
-              {wine.name} - {wine.taste}
-            </p>
+            <h2>{wine.name}</h2>
+            <h3>{wine.taste}</h3>
+            <p>{wine.description}</p>
+            <img src={wine.pictureURL}></img>
           </Col>
         ))}
       </Row>
