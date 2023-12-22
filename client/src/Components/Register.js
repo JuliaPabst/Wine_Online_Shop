@@ -1,14 +1,14 @@
 import React from "react";
 import { useState } from "react";
 
-export default function Register(
+export default function Register({
   changeLoggingStatus,
   changeState,
   changePassword,
   changeEmail,
   email,
-  password
-) {
+  password,
+}) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [ZIPCode, setZIPCode] = useState(0);
@@ -35,10 +35,10 @@ export default function Register(
         street,
         houseNumber,
         flatNumber,
-        createdAt,
-        updatedAt,
         email,
         password,
+        createdAt,
+        updatedAt,
       }),
     })
       .then((response) => {
