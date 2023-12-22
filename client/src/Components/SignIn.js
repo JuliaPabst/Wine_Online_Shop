@@ -1,11 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-export default function SignIn() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [correctSignIn, setCorrectSignIn] = useState(false);
-
+export default function SignIn({
+  changeLoggingStatus,
+  changeState,
+  changePassword,
+  changeEmail,
+  email,
+  password,
+}) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -18,7 +21,8 @@ export default function SignIn() {
     })
       .then((response) => {
         if (response.ok) {
-          setCorrectSignIn(true);
+          changeLoggingStatus(true);
+          changeState("home");
           return response.json();
         }
         throw new Error("Network response was not ok.");
@@ -38,16 +42,14 @@ export default function SignIn() {
           <label>Email</label>
           <input
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => changeEmail(e.target.value)}
           ></input>
         </div>
         <div>
           <label>Passwort</label>
           <input
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => changePassword(e.target.value)}
           ></input>
         </div>
         <button type="submit">Senden</button>
