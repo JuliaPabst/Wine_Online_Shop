@@ -11,10 +11,10 @@ router.get("/", async (req, res) => {
   }
 });
 
-app.post("/signIn", async (req, res) => {
-  const { username, password } = req.body;
+router.post("/signIn", async (req, res) => {
+  const { email, password } = req.body;
 
-  const user = await User.findOne({ username, password });
+  const user = await User.findOne({ email, password });
   if (user) {
     res.json({ status: "loggedIn" });
   } else {
