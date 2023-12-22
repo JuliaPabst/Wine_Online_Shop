@@ -5,7 +5,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 export default function Overview() {
-  const [wines, setWines] = useState([]);
+  let [wines, setWines] = useState([]);
+  let [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch("http://localhost:3000/api/wines")
@@ -13,22 +14,28 @@ export default function Overview() {
       .then((data) => {
         console.log(data);
         setWines(data);
+        setLoading(false);
       })
       .catch((error) => console.error("Error fetching data:", error));
+    setLoading(true);
   }, []);
 
-  return (
-    <Container>
-      <Row className="justify-content-md-center">
-        {wines.map((wine) => (
-          <Col xs="12" lg="4">
-            <h2>{wine.name}</h2>
-            <h3>{wine.taste}</h3>
-            <p>{wine.description}</p>
-            <img src={wine.pictureURL}></img>
-          </Col>
-        ))}
-      </Row>
-    </Container>
-  );
+  if (loading === true) {
+    return <p>Loading</p>;
+  } else {
+    return (
+      <Container>
+        <Row className="justify-content-md-center">
+          {wines.map((wine) => (
+            <Col xs="12" lg="4" id={wine._id}>
+              <h2>{wine.name}</h2>
+              <h3>{wine.taste}</h3>
+              <p>{wine.description}</p>
+              <img src={wine.pictureURL}></img>
+            </Col>
+          ))}
+        </Row>
+      </Container>
+    );
+  }
 }
