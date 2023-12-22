@@ -13,6 +13,8 @@ function App() {
   let [loggingStatus, setLoggingStatus] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [orders, setOrders] = useState([]);
 
   function changeState(state) {
     setState(state);
@@ -30,15 +32,29 @@ function App() {
     setPassword(password);
   }
 
+  function changeFirstName(password) {
+    setFirstName(password);
+  }
+
+  function changeOrders(orders) {
+    setOrders(orders);
+  }
+
+  useEffect(() => {
+    console.log(orders);
+  }, [orders]);
+
   return (
     <div className="App">
       <Header
         changeState={changeState}
         loggingStatus={loggingStatus}
         changeLoggingStatus={changeLoggingStatus}
+        firstName={firstName}
+        orders={orders}
       />
       {state === "home" ? (
-        <Overview />
+        <Overview loggingStatus={loggingStatus} changeOrders={changeOrders} />
       ) : state === "signIn" ? (
         <SignIn
           changeLoggingStatus={changeLoggingStatus}

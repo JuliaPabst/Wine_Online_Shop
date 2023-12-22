@@ -5,6 +5,7 @@ export default function header({
   changeState,
   loggingStatus,
   changeLoggingStatus,
+  orders,
 }) {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
@@ -21,7 +22,9 @@ export default function header({
               <span>
                 <button
                   className="btn btn-primary"
-                  onClick={() => changeState("cart")}
+                  onClick={(event) => {
+                    changeState("cart");
+                  }}
                 >
                   {" "}
                   Einkaufswagen
