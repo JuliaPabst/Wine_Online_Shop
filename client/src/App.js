@@ -32,7 +32,11 @@ function App() {
 
   return (
     <div className="App">
-      <Header changeState={changeState} />
+      <Header
+        changeState={changeState}
+        loggingStatus={loggingStatus}
+        changeLoggingStatus={changeLoggingStatus}
+      />
       {state === "home" ? (
         <Overview />
       ) : state === "signIn" ? (
@@ -45,7 +49,14 @@ function App() {
           password={password}
         />
       ) : state === "register" ? (
-        <Register />
+        <Register
+          changeLoggingStatus={changeLoggingStatus}
+          changeState={changeState}
+          changeEmail={changeEmail}
+          changePassword={changePassword}
+          email={email}
+          password={password}
+        />
       ) : state === "cart" ? (
         <Cart />
       ) : state === "order" ? (
