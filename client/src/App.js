@@ -13,6 +13,7 @@ function App() {
   let [loggingStatus, setLoggingStatus] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [user_id, setUser_id] = useState("");
   const [firstName, setFirstName] = useState("");
   const [orders, setOrders] = useState([]);
 
@@ -32,8 +33,8 @@ function App() {
     setPassword(password);
   }
 
-  function changeFirstName(password) {
-    setFirstName(password);
+  function changeUser_id(user_id) {
+    setUser_id(user_id);
   }
 
   function changeOrders(orders) {
@@ -61,6 +62,7 @@ function App() {
           changeState={changeState}
           changeEmail={changeEmail}
           changePassword={changePassword}
+          changeUser_id={changeUser_id}
           email={email}
           password={password}
         />
@@ -70,6 +72,7 @@ function App() {
           changeState={changeState}
           changeEmail={changeEmail}
           changePassword={changePassword}
+          changeUser_id={changeUser_id}
           email={email}
           password={password}
         />

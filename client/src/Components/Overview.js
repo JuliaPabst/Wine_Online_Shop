@@ -30,51 +30,67 @@ export default function Overview({ loggingStatus, changeOrders }) {
     setCurrentOrders(newOrders);
   }, [wines]);
 
-  const handleSubmit = async (wineId, amount, event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    let updatedOrders = currentOrders.map((order) => {
-      if (order._id === wineId) {
-        return { ...order, amount: Number(amount) };
-      }
-      return order;
+    const form = event.target;
+    const newOrders = wines.map((wine) => {
+      const amount = form[`amount_${wine._id}`].value;
+      return { _id: wine._id, amount: Number(amount) };
     });
-    setCurrentOrders(updatedOrders);
-    changeOrders(updatedOrders);
+
+    setCurrentOrders(newOrders);
+    changeOrders(newOrders);
+    postOrder();
   };
+
+  function postOrder() {
+    fetch("http://localhost:3000/api/orders", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(currentOrders),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Order posted:", data);
+        // Handle successful posting (e.g., showing a confirmation message)
+      })
+      .catch((error) => {
+        console.error("Error posting order:", error);
+        // Handle posting error
+      });
+  }
 
   if (loading === true) {
     return <p>Loading</p>;
   } else {
     return (
       <Container>
-        <Row className="justify-content-md-center">
-          {wines.map((wine) => (
-            <Col key={wine._id} xs="12" lg="4">
-              <h2>{wine.name}</h2>
-              <h3>{wine.taste}</h3>
-              <p>{wine.description}</p>
-              <img src={wine.pictureURL} alt={wine.name}></img>
-              {loggingStatus ? (
-                <div>
-                  <form
-                    onSubmit={(e) => handleSubmit(wine._id, currentAmount, e)}
-                  >
+        <form onSubmit={handleFormSubmit}>
+          <Row className="justify-content-md-center">
+            {wines.map((wine) => (
+              <Col key={wine._id} xs="12" lg="4">
+                <h2>{wine.name}</h2>
+                <h3>{wine.taste}</h3>
+                <p>{wine.description}</p>
+                <img src={wine.pictureURL} alt={wine.name}></img>
+                {loggingStatus && (
+                  <div>
                     <label>Menge:</label>{" "}
                     <input
                       type="number"
-                      name="currentAmount"
-                      onChange={(e) => setCurrentAmount(e.target.value)}
+                      name={`amount_${wine._id}`}
+                      defaultValue="0"
                     ></input>
-                    <button type="submit">Zu Warenkorb hinzufügen</button>
-                  </form>
-                </div>
-              ) : (
-                ""
-              )}
-            </Col>
-          ))}
-        </Row>
+                  </div>
+                )}
+              </Col>
+            ))}
+          </Row>
+          {loggingStatus && <button type="submit">Bestellung aufgeben</button>}
+        </form>
       </Container>
     );
   }

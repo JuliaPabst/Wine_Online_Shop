@@ -6,6 +6,7 @@ export default function SignIn({
   changeState,
   changePassword,
   changeEmail,
+  changeUser_id,
   email,
   password,
 }) {
@@ -29,6 +30,7 @@ export default function SignIn({
       })
       .then((data) => {
         console.log("Success:", data);
+        changeUser_id(data.user_id);
       })
       .catch((error) => {
         console.error("Error:", error);
