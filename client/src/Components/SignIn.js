@@ -24,6 +24,7 @@ export default function SignIn({
         if (response.ok) {
           changeLoggingStatus(true);
           changeState("home");
+          console.log("HI");
           return response.json();
         }
         throw new Error("Network response was not ok.");
