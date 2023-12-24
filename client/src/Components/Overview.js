@@ -4,7 +4,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-export default function Overview({ loggingStatus, changeOrders }) {
+export default function Overview({ loggingStatus, changeOrders, user_id }) {
   const [wines, setWines] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentOrders, setCurrentOrders] = useState([]);
@@ -34,32 +34,37 @@ export default function Overview({ loggingStatus, changeOrders }) {
     event.preventDefault();
 
     const form = event.target;
-    const newOrders = wines.map((wine) => {
-      const amount = form[`amount_${wine._id}`].value;
-      return { _id: wine._id, amount: Number(amount) };
-    });
-
+    const newOrders = wines
+      .map((wine) => {
+        const amountInput = form[`amount_${wine._id}`];
+        const amount = amountInput ? Number(amountInput.value) : 0;
+        return { wine_id: wine._id, amount };
+      })
+      .filter((order) => order.amount > 0);
     setCurrentOrders(newOrders);
     changeOrders(newOrders);
-    postOrder();
+    postOrder(newOrders);
   };
 
   function postOrder() {
-    fetch("http://localhost:3000/api/orders", {
+    fetch("http://localhost:3000/api/orders/newOrder", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(currentOrders),
+      body: JSON.stringify({
+        user_id: user_id,
+        order: currentOrders,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      }),
     })
       .then((response) => response.json())
       .then((data) => {
         console.log("Order posted:", data);
-        // Handle successful posting (e.g., showing a confirmation message)
       })
       .catch((error) => {
         console.error("Error posting order:", error);
-        // Handle posting error
       });
   }
 

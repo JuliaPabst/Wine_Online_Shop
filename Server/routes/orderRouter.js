@@ -11,4 +11,20 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.post("/newOrder", async (req, res) => {
+  try {
+    const newOrder = new Order({
+      user_id: req.body.user_id,
+      order: req.body.order,
+      createdAt: req.body.createdAt,
+      updatedAt: req.body.updatedAt,
+    });
+
+    const savedOrder = await newOrder.save();
+    res.status(201).json(savedOrder);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
 module.exports = router;

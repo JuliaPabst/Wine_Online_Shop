@@ -55,7 +55,11 @@ function App() {
         orders={orders}
       />
       {state === "home" ? (
-        <Overview loggingStatus={loggingStatus} changeOrders={changeOrders} />
+        <Overview
+          loggingStatus={loggingStatus}
+          changeOrders={changeOrders}
+          user_id={user_id}
+        />
       ) : state === "signIn" ? (
         <SignIn
           changeLoggingStatus={changeLoggingStatus}
