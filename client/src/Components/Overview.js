@@ -46,7 +46,7 @@ export default function Overview({ loggingStatus, changeOrders, user_id }) {
     postOrder(newOrders);
   };
 
-  function postOrder() {
+  function postOrder(newOrders) {
     fetch("http://localhost:3000/api/orders/newOrder", {
       method: "POST",
       headers: {
@@ -54,7 +54,7 @@ export default function Overview({ loggingStatus, changeOrders, user_id }) {
       },
       body: JSON.stringify({
         user_id: user_id,
-        order: currentOrders,
+        order: newOrders,
         createdAt: new Date(),
         updatedAt: new Date(),
       }),
