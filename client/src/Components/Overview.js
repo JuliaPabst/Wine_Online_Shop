@@ -48,7 +48,6 @@ export default function Overview({
       .filter((order) => order.amount > 0);
     setCurrentOrders(newOrders);
     changeOrders(newOrders);
-    postOrder(newOrders);
   };
 
   if (loading === true) {

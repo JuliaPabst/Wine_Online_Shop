@@ -88,7 +88,12 @@ function App() {
           password={password}
         />
       ) : state === "cart" ? (
-        <Cart />
+        <Cart
+          orders={orders}
+          changeOrders={changeOrders}
+          wines={wines}
+          user_id={user_id}
+        />
       ) : state === "order" ? (
         <Order user_id={user_id} wines={wines} state={state} />
       ) : (
