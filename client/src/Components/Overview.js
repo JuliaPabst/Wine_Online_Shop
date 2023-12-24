@@ -56,12 +56,17 @@ export default function Overview({
     return (
       <Container>
         <form onSubmit={handleFormSubmit}>
+          {loggingStatus && (
+            <button type="submit">Auswahl in den Warenkorb legen</button>
+          )}
           <Row className="justify-content-md-center">
             {wines.map((wine) => (
               <Col key={wine._id} xs="12" lg="4">
                 <h2>{wine.name}</h2>
                 <h3>{wine.taste}</h3>
                 <p>{wine.description}</p>
+                <div>Alkoholgehalt: {wine.alcoholLevel}%</div>
+                <div>Preis: {wine.price}€</div>
                 <img src={wine.pictureURL} alt={wine.name}></img>
                 {loggingStatus && (
                   <div>
@@ -76,9 +81,6 @@ export default function Overview({
               </Col>
             ))}
           </Row>
-          {loggingStatus && (
-            <button type="submit">In den Warenkorb legen</button>
-          )}
         </form>
       </Container>
     );

@@ -1,10 +1,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
+// todo: add dynamic prices
+
 export default function Cart({ orders, wines, user_id, changeOrders }) {
   const [orderSubmitted, setOrderSubmitted] = useState(false);
 
-  const handleFormSubmit = async (event) => {
+  function handleFormSubmit(event) {
     event.preventDefault();
 
     const form = event.target;
@@ -16,7 +18,7 @@ export default function Cart({ orders, wines, user_id, changeOrders }) {
       })
       .filter((order) => order.amount > 0);
     postOrder(newOrders);
-  };
+  }
 
   function postOrder(newOrders) {
     fetch("http://localhost:3000/api/orders/newOrder", {
@@ -60,7 +62,9 @@ export default function Cart({ orders, wines, user_id, changeOrders }) {
                     type="number"
                     name={`amount_${wine._id}`}
                     defaultValue={order.amount}
+                    onChange={(event) => changeAmount(event)}
                   ></input>
+                  <p>Preis gesamt: {wine.price * order.amount}€</p>
                 </div>
               ))}
           </div>
