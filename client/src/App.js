@@ -16,6 +16,7 @@ function App() {
   const [user_id, setUser_id] = useState("");
   const [firstName, setFirstName] = useState("");
   const [orders, setOrders] = useState([]);
+  const [wines, setWines] = useState([]);
 
   function changeState(state) {
     setState(state);
@@ -41,6 +42,10 @@ function App() {
     setOrders(orders);
   }
 
+  function changeWines(wines) {
+    setWines(wines);
+  }
+
   useEffect(() => {
     console.log(orders);
   }, [orders]);
@@ -59,6 +64,8 @@ function App() {
           loggingStatus={loggingStatus}
           changeOrders={changeOrders}
           user_id={user_id}
+          wines={wines}
+          changeWines={changeWines}
         />
       ) : state === "signIn" ? (
         <SignIn
@@ -83,7 +90,7 @@ function App() {
       ) : state === "cart" ? (
         <Cart />
       ) : state === "order" ? (
-        <Order />
+        <Order user_id={user_id} wines={wines} state={state} />
       ) : (
         0
       )}

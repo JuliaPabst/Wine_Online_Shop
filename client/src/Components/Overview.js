@@ -4,8 +4,13 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-export default function Overview({ loggingStatus, changeOrders, user_id }) {
-  const [wines, setWines] = useState([]);
+export default function Overview({
+  loggingStatus,
+  changeOrders,
+  changeWines,
+  user_id,
+  wines,
+}) {
   const [loading, setLoading] = useState(true);
   const [currentOrders, setCurrentOrders] = useState([]);
   const [currentWine, setCurrentWine] = useState("");
@@ -15,7 +20,7 @@ export default function Overview({ loggingStatus, changeOrders, user_id }) {
     fetch("http://localhost:3000/api/wines")
       .then((response) => response.json())
       .then((data) => {
-        setWines(data);
+        changeWines(data);
         setLoading(false);
       })
       .catch((error) => console.error("Error fetching data:", error));
