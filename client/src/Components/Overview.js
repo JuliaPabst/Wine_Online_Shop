@@ -76,7 +76,9 @@ export default function Overview({
               </Col>
             ))}
           </Row>
-          {loggingStatus && <button type="submit">Bestellung aufgeben</button>}
+          {loggingStatus && (
+            <button type="submit">In den Warenkorb legen</button>
+          )}
         </form>
       </Container>
     );

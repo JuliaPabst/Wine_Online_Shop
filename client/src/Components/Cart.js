@@ -1,6 +1,9 @@
 import React from "react";
+import { useState, useEffect } from "react";
 
 export default function Cart({ orders, wines, user_id, changeOrders }) {
+  const [orderSubmitted, setOrderSubmitted] = useState(false);
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -37,20 +40,26 @@ export default function Cart({ orders, wines, user_id, changeOrders }) {
         console.error("Error posting order:", error);
       });
   }
-  return (
+  return orderSubmitted ? (
+    <div>
+      Danke für Ihre Bestellung! Sie erhalten als Bestätigung eine Email!
+    </div>
+  ) : orders.length == 0 ? (
+    <div>Der Warenkorb ist leer.</div>
+  ) : (
     <div>
       <form onSubmit={handleFormSubmit}>
-        {orders.map((order) => (
-          <div>
+        {orders.map((order, index) => (
+          <div key={index}>
             {wines
-              .find((wine) => wine._id == order.wine_id)
+              .filter((wine) => wine._id == order.wine_id)
               .map((wine) => (
-                <div>
+                <div key={wine._id}>
                   <label>{wine.name}</label>
                   <input
                     type="number"
                     name={`amount_${wine._id}`}
-                    defaultValue="0"
+                    defaultValue={order.amount}
                   ></input>
                 </div>
               ))}
