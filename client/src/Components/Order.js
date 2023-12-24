@@ -17,6 +17,17 @@ export default function Order({ user_id, wines, state }) {
     setLoading(true);
   }, [state]);
 
+  function deleteOrder(orderId) {
+    fetch(`http://localhost:3000/api/orders/${orderId}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Order deleted:", data);
+        setOrders(orders.filter((order) => order._id !== orderId));
+      })
+      .catch((error) => console.error("Error deleting order:", error));
+  }
   return loading ? (
     <div>Loading</div>
   ) : (
@@ -34,11 +45,13 @@ export default function Order({ user_id, wines, state }) {
                   <div key={wineIndex}>
                     <span>{matchedWine.name}: </span>
                     <span>{orderWine.amount}</span>
-                    <button>Bestellung löschen</button>
                   </div>
                 )
               );
             })}
+            <button onClick={() => deleteOrder(order._id)}>
+              Bestellung löschen
+            </button>
           </span>
         </div>
       ))}
