@@ -1,10 +1,19 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 // todo: add dynamic prices
 
-export default function Cart({ orders, wines, user_id, changeOrders }) {
-  const [orderSubmitted, setOrderSubmitted] = useState(false);
+export default function Cart({
+  orders,
+  wines,
+  user_id,
+  orderSubmitted,
+  changeOrderSubmitted,
+  changeOrders,
+}) {
   const [totalPrice, setTotalPrice] = useState(0);
 
   function changeAmount(wineId, newAmount) {
@@ -51,6 +60,7 @@ export default function Cart({ orders, wines, user_id, changeOrders }) {
         console.log("hi");
         console.log(user_id);
         changeOrders([]);
+        changeOrderSubmitted(true);
         setTotalPrice(0);
       })
       .catch((error) => {
@@ -72,37 +82,45 @@ export default function Cart({ orders, wines, user_id, changeOrders }) {
   useEffect(() => {
     calculateTotalPrice();
   }, [orders]);
+
   return orderSubmitted ? (
-    <div>
-      Danke für Ihre Bestellung! Sie erhalten als Bestätigung eine Email!
-    </div>
+    <div className="cart-status">Danke für Ihre Bestellung!</div>
   ) : orders.length == 0 ? (
-    <div>Der Warenkorb ist leer.</div>
+    <div className="cart-status">Der Warenkorb ist leer.</div>
   ) : (
     <div>
       <form onSubmit={handleFormSubmit}>
-        {orders.map((order, index) => (
-          <div key={index}>
-            {wines
-              .filter((wine) => wine._id == order.wine_id)
-              .map((wine) => (
-                <div key={wine._id}>
-                  <label>{wine.name}</label>
-                  <input
-                    type="number"
-                    name={`amount_${wine._id}`}
-                    defaultValue={order.amount}
-                    onChange={(event) =>
-                      changeAmount(wine._id, Number(event.target.value))
-                    }
-                  ></input>
-                  <p>Preis: {wine.price * order.amount}€</p>
-                </div>
-              ))}
-          </div>
-        ))}
-        <p>Gesamtpreis:{totalPrice}€</p>
-        <button type="submit">Bestellung aufgeben</button>
+        <h2>Meine Bestellung</h2>
+        <Container>
+          <Row className="justify-content-md-center overview-wines-row">
+            {orders.map((order, index) => (
+              <div key={index}>
+                {wines
+                  .filter((wine) => wine._id == order.wine_id)
+                  .map((wine) => (
+                    <div key={wine._id}>
+                      <Col key={index} xs="12" sm="6">
+                        <label className="bold">{wine.name}</label>
+                      </Col>
+                      <Col key={index} xs="12" sm="6">
+                        <input
+                          type="number"
+                          name={`amount_${wine._id}`}
+                          defaultValue={order.amount}
+                          onChange={(event) =>
+                            changeAmount(wine._id, Number(event.target.value))
+                          }
+                        ></input>
+                        <p>Preis: {wine.price * order.amount}€</p>
+                      </Col>
+                    </div>
+                  ))}
+              </div>
+            ))}
+            <p className="gesamtpreis">Gesamtpreis: {totalPrice}€</p>
+          </Row>
+          <button type="submit">Bestellung aufgeben</button>
+        </Container>
       </form>
     </div>
   );

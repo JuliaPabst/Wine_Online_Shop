@@ -14,7 +14,8 @@ code {
 }
 
 h2 {
-  font-size: 50px;
+  font-size: 40px;
+  padding: 10px;
 }
 
 p {
@@ -41,12 +42,28 @@ button {
   font-size: 25px;
 }
 
-Navbar {
-  background-color: black;
-}
-
 .bold {
   font-weight: 600;
+}
+
+/* Header */
+
+.navbar {
+  background-color: rgb(249, 242, 226);
+}
+
+.navbar-button {
+  border-width: 0px;
+}
+
+.navbar-menu-button {
+  border-top-width: 2px;
+  border-bottom-width: 0px;
+  border-left-width: 0px;
+  border-right-width: 0px;
+  margin: 0;
+  width: 80%;
+  font-size: 20px;
 }
 
 /* Overview */
@@ -65,5 +82,32 @@ Navbar {
 }
 
 .wine-taste {
+  font-size: 30px;
+}
+
+/* Cart */
+
+.cart-status {
+  margin-top: 30px;
+  font-weight: 500;
+  font-size: 25px;
+}
+
+.gesamtpreis {
+  font-size: 30px;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+/* Orders */
+.order {
+  margin-bottom: 50px;
+}
+
+.delete-order-button {
+  font-size: 18px;
+}
+
+.order-number {
   font-size: 30px;
 }

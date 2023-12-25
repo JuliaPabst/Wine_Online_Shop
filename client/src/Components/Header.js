@@ -5,13 +5,12 @@ export default function header({
   changeState,
   loggingStatus,
   changeLoggingStatus,
-  orders,
 }) {
   return (
-    <Navbar expand="lg">
+    <Navbar expand="lg" className="navbar">
       <Container>
         <Navbar.Brand href="#home">
-          <button onClick={() => changeState("home")}>
+          <button onClick={() => changeState("home")} className="navbar-button">
             Coloreti Suffumbergi
           </button>
         </Navbar.Brand>
@@ -21,7 +20,7 @@ export default function header({
             {loggingStatus ? (
               <span>
                 <button
-                  className="btn btn-primary"
+                  className="navbar-menu-button"
                   onClick={(event) => {
                     changeState("cart");
                   }}
@@ -30,13 +29,13 @@ export default function header({
                   Einkaufswagen
                 </button>
                 <button
-                  className="btn btn-primary"
+                  className="navbar-menu-button"
                   onClick={() => changeState("order")}
                 >
                   Meine Bestellungen
                 </button>
                 <button
-                  className="btn btn-primary"
+                  className="navbar-menu-button"
                   onClick={() => {
                     changeLoggingStatus(false);
                     changeState("home");
@@ -48,13 +47,13 @@ export default function header({
             ) : (
               <span>
                 <button
-                  className="btn btn-primary"
+                  className="navbar-menu-button"
                   onClick={() => changeState("signIn")}
                 >
                   Anmelden
                 </button>
                 <button
-                  className="btn btn-primary"
+                  className="navbar-menu-button"
                   onClick={() => changeState("register")}
                 >
                   Registrieren

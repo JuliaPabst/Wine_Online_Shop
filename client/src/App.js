@@ -17,12 +17,14 @@ function App() {
   const [firstName, setFirstName] = useState("");
   const [orders, setOrders] = useState([]);
   const [wines, setWines] = useState([]);
+  const [orderSubmitted, setOrderSubmitted] = useState(false);
 
   function changeState(state) {
     setState(state);
   }
 
   function changeLoggingStatus(loggingStatus) {
+    setOrderSubmitted(false);
     setLoggingStatus(loggingStatus);
   }
 
@@ -44,6 +46,10 @@ function App() {
 
   function changeWines(wines) {
     setWines(wines);
+  }
+
+  function changeOrderSubmitted(orderSubmitted) {
+    setOrderSubmitted(orderSubmitted);
   }
 
   useEffect(() => {
@@ -93,6 +99,8 @@ function App() {
           changeOrders={changeOrders}
           wines={wines}
           user_id={user_id}
+          orderSubmitted={orderSubmitted}
+          changeOrderSubmitted={changeOrderSubmitted}
         />
       ) : state === "order" ? (
         <Order user_id={user_id} wines={wines} state={state} />

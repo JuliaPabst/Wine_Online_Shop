@@ -1,5 +1,4 @@
 import React from "react";
-import { useState, useEffect } from "react";
 
 export default function SignIn({
   changeLoggingStatus,
@@ -40,20 +39,22 @@ export default function SignIn({
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email</label>
-          <input
-            type="email"
-            onChange={(e) => changeEmail(e.target.value)}
-          ></input>
-        </div>
-        <div>
-          <label>Passwort</label>
-          <input
-            type="password"
-            onChange={(e) => changePassword(e.target.value)}
-          ></input>
-        </div>
+        <Container>
+          <div>
+            <label>Email: </label>
+            <input
+              type="email"
+              onChange={(e) => changeEmail(e.target.value)}
+            ></input>
+          </div>
+          <div>
+            <label>Passwort: </label>
+            <input
+              type="password"
+              onChange={(e) => changePassword(e.target.value)}
+            ></input>
+          </div>
+        </Container>
         <button type="submit">Senden</button>
       </form>
     </div>

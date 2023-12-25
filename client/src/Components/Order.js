@@ -32,11 +32,12 @@ export default function Order({ user_id, wines, state }) {
     <div>Loading</div>
   ) : (
     <div>
+      <h2>Offene Bestellungen</h2>
       {orders.map((order, index) => (
         <div key={index}>
           {order.user_id == user_id ? (
-            <div>
-              <h2>Bestellung {index + 1}</h2>
+            <div className="order">
+              <h3 className="order-number">Bestellung {index + 1}</h3>
               <span>
                 {order.order.map((orderWine, wineIndex) => {
                   const matchedWine = wines.find(
@@ -51,7 +52,7 @@ export default function Order({ user_id, wines, state }) {
                     )
                   );
                 })}
-                <button onClick={() => deleteOrder(order._id)}>
+                <button className="delete-order-button" onClick={() => deleteOrder(order._id)}>
                   Bestellung löschen
                 </button>
               </span>
