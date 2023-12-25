@@ -60,7 +60,7 @@ export default function Overview({
 
           <Row className="justify-content-md-center overview-wines-row">
             {wines.map((wine, index) => (
-              <Col key={wine._id} xs="12" lg="4" className="card">
+              <Col key={wine._id} xs="12" xl="6" className="card">
                 <Row className="justify-content-md-center overview-wines-row">
                   <Col key={index} xs="12" sm="6">
                     <h2>{wine.name}</h2>
@@ -81,17 +81,17 @@ export default function Overview({
                       alt={wine.name}
                       className="wine-picture"
                     ></img>
+                    {loggingStatus && (
+                      <div>
+                        <label className="bold">Menge:</label>{" "}
+                        <input
+                          type="number"
+                          name={`amount_${wine._id}`}
+                          defaultValue="0"
+                        ></input>
+                      </div>
+                    )}
                   </Col>
-                  {loggingStatus && (
-                    <div>
-                      <label className="bold">Menge:</label>{" "}
-                      <input
-                        type="number"
-                        name={`amount_${wine._id}`}
-                        defaultValue="0"
-                      ></input>
-                    </div>
-                  )}
                 </Row>
               </Col>
             ))}

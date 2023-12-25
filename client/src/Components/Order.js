@@ -56,7 +56,7 @@ export default function Order({ user_id, wines, state }) {
                   className="small-button"
                   onClick={() => deleteOrder(order._id)}
                 >
-                  Bestellung löschen
+                  Bestellung stornieren
                 </button>
               </span>
             </div>
