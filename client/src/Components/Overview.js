@@ -57,25 +57,42 @@ export default function Overview({
           {loggingStatus && (
             <button type="submit">Auswahl in den Warenkorb legen</button>
           )}
-          <Row className="justify-content-md-center">
-            {wines.map((wine) => (
-              <Col key={wine._id} xs="12" lg="4">
-                <h2>{wine.name}</h2>
-                <h3>{wine.taste}</h3>
-                <p>{wine.description}</p>
-                <div>Alkoholgehalt: {wine.alcoholLevel}%</div>
-                <div>Preis: {wine.price}€</div>
-                <img src={wine.pictureURL} alt={wine.name}></img>
-                {loggingStatus && (
-                  <div>
-                    <label>Menge:</label>{" "}
-                    <input
-                      type="number"
-                      name={`amount_${wine._id}`}
-                      defaultValue="0"
-                    ></input>
-                  </div>
-                )}
+
+          <Row className="justify-content-md-center overview-wines-row">
+            {wines.map((wine, index) => (
+              <Col key={wine._id} xs="12" lg="4" className="card">
+                <Row className="justify-content-md-center overview-wines-row">
+                  <Col key={index} xs="12" sm="6">
+                    <h2>{wine.name}</h2>
+                    <p className="wine-taste">{wine.taste}</p>
+                    <p>{wine.description}</p>
+                    <p>
+                      {" "}
+                      <span className="bold">Alkoholgehalt: </span>{" "}
+                      {wine.alcoholLevel}%
+                    </p>
+                    <p>
+                      <span className="bold">Preis:</span> {wine.price}€
+                    </p>
+                  </Col>
+                  <Col xs="12" sm="6">
+                    <img
+                      src={wine.pictureURL}
+                      alt={wine.name}
+                      className="wine-picture"
+                    ></img>
+                    {loggingStatus && (
+                      <div>
+                        <label>Menge:</label>{" "}
+                        <input
+                          type="number"
+                          name={`amount_${wine._id}`}
+                          defaultValue="0"
+                        ></input>
+                      </div>
+                    )}
+                  </Col>
+                </Row>
               </Col>
             ))}
           </Row>

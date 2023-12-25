@@ -48,6 +48,8 @@ export default function Cart({ orders, wines, user_id, changeOrders }) {
       .then((response) => response.json())
       .then((data) => {
         console.log("Order posted:", data);
+        console.log("hi");
+        console.log(user_id);
         changeOrders([]);
         setTotalPrice(0);
       })
@@ -56,7 +58,16 @@ export default function Cart({ orders, wines, user_id, changeOrders }) {
       });
   }
 
-  function calculateTotalPrice() {}
+  function calculateTotalPrice() {
+    let total = 0;
+    orders.forEach((order) => {
+      const wine = wines.find((wine) => wine._id === order.wine_id);
+      if (wine) {
+        total += wine.price * order.amount;
+      }
+    });
+    setTotalPrice(total);
+  }
 
   useEffect(() => {
     calculateTotalPrice();
@@ -88,9 +99,9 @@ export default function Cart({ orders, wines, user_id, changeOrders }) {
                   <p>Preis: {wine.price * order.amount}€</p>
                 </div>
               ))}
-            <p>Gesamtpreis:{totalPrice}</p>
           </div>
         ))}
+        <p>Gesamtpreis:{totalPrice}€</p>
         <button type="submit">Bestellung aufgeben</button>
       </form>
     </div>

@@ -34,25 +34,31 @@ export default function Order({ user_id, wines, state }) {
     <div>
       {orders.map((order, index) => (
         <div key={index}>
-          <h2>Bestellung {index + 1}</h2>
-          <span>
-            {order.order.map((orderWine, wineIndex) => {
-              const matchedWine = wines.find(
-                (wine) => wine._id === orderWine.wine_id
-              );
-              return (
-                matchedWine && (
-                  <div key={wineIndex}>
-                    <span>{matchedWine.name}: </span>
-                    <span>{orderWine.amount}</span>
-                  </div>
-                )
-              );
-            })}
-            <button onClick={() => deleteOrder(order._id)}>
-              Bestellung löschen
-            </button>
-          </span>
+          {order.user_id == user_id ? (
+            <div>
+              <h2>Bestellung {index + 1}</h2>
+              <span>
+                {order.order.map((orderWine, wineIndex) => {
+                  const matchedWine = wines.find(
+                    (wine) => wine._id === orderWine.wine_id
+                  );
+                  return (
+                    matchedWine && (
+                      <div key={wineIndex}>
+                        <span>{matchedWine.name}: </span>
+                        <span>{orderWine.amount}</span>
+                      </div>
+                    )
+                  );
+                })}
+                <button onClick={() => deleteOrder(order._id)}>
+                  Bestellung löschen
+                </button>
+              </span>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       ))}
     </div>

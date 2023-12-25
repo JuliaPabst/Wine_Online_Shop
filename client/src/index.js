@@ -1,9 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import WebFont from "webfontloader";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+
+WebFont.load({
+  google: {
+    families: ["Ubuntu:300,400,500,700"],
+  },
+});
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
