@@ -94,12 +94,12 @@ export default function Cart({
         <Container>
           <Row className="justify-content-md-center overview-wines-row">
             {orders.map((order, index) => (
-              <div key={index}>
+              <div key={order.wine_id}>
                 {wines
                   .filter((wine) => wine._id == order.wine_id)
                   .map((wine) => (
                     <div key={wine._id}>
-                      <Col key={index} xs="12" sm="6">
+                      <Col key={wine._id} xs="12" sm="6">
                         <label className="bold">{wine.name}</label>
                       </Col>
                       <Col key={index} xs="12" sm="6">
@@ -111,7 +111,9 @@ export default function Cart({
                             changeAmount(wine._id, Number(event.target.value))
                           }
                         ></input>
-                        <p>Preis: {wine.price * order.amount}€</p>
+                        <p key={wine._id}>
+                          Preis: {wine.price * order.amount}€
+                        </p>
                       </Col>
                     </div>
                   ))}
