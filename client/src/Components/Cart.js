@@ -5,6 +5,18 @@ import { useState, useEffect } from "react";
 
 export default function Cart({ orders, wines, user_id, changeOrders }) {
   const [orderSubmitted, setOrderSubmitted] = useState(false);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  function changeAmount(wineId, newAmount) {
+    const updatedOrders = orders.map((order) => {
+      if (order.wine_id === wineId) {
+        return { ...order, amount: newAmount };
+      }
+      return order;
+    });
+
+    changeOrders(updatedOrders);
+  }
 
   function handleFormSubmit(event) {
     event.preventDefault();
@@ -37,11 +49,18 @@ export default function Cart({ orders, wines, user_id, changeOrders }) {
       .then((data) => {
         console.log("Order posted:", data);
         changeOrders([]);
+        setTotalPrice(0);
       })
       .catch((error) => {
         console.error("Error posting order:", error);
       });
   }
+
+  function calculateTotalPrice() {}
+
+  useEffect(() => {
+    calculateTotalPrice();
+  }, [orders]);
   return orderSubmitted ? (
     <div>
       Danke für Ihre Bestellung! Sie erhalten als Bestätigung eine Email!
@@ -62,11 +81,14 @@ export default function Cart({ orders, wines, user_id, changeOrders }) {
                     type="number"
                     name={`amount_${wine._id}`}
                     defaultValue={order.amount}
-                    onChange={(event) => changeAmount(event)}
+                    onChange={(event) =>
+                      changeAmount(wine._id, Number(event.target.value))
+                    }
                   ></input>
-                  <p>Preis gesamt: {wine.price * order.amount}€</p>
+                  <p>Preis: {wine.price * order.amount}€</p>
                 </div>
               ))}
+            <p>Gesamtpreis:{totalPrice}</p>
           </div>
         ))}
         <button type="submit">Bestellung aufgeben</button>

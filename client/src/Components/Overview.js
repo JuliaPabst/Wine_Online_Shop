@@ -39,13 +39,11 @@ export default function Overview({
     event.preventDefault();
 
     const form = event.target;
-    const newOrders = wines
-      .map((wine) => {
-        const amountInput = form[`amount_${wine._id}`];
-        const amount = amountInput ? Number(amountInput.value) : 0;
-        return { wine_id: wine._id, amount };
-      })
-      .filter((order) => order.amount > 0);
+    const newOrders = wines.map((wine) => {
+      const amountInput = form[`amount_${wine._id}`];
+      const amount = amountInput ? Number(amountInput.value) : 0;
+      return { wine_id: wine._id, amount };
+    });
     setCurrentOrders(newOrders);
     changeOrders(newOrders);
   };
