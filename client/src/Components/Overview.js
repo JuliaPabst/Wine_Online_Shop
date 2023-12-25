@@ -81,17 +81,17 @@ export default function Overview({
                       alt={wine.name}
                       className="wine-picture"
                     ></img>
-                    {loggingStatus && (
-                      <div>
-                        <label className="bold">Menge:</label>{" "}
-                        <input
-                          type="number"
-                          name={`amount_${wine._id}`}
-                          defaultValue="0"
-                        ></input>
-                      </div>
-                    )}
                   </Col>
+                  {loggingStatus && (
+                    <div>
+                      <label className="bold">Menge:</label>{" "}
+                      <input
+                        type="number"
+                        name={`amount_${wine._id}`}
+                        defaultValue="0"
+                      ></input>
+                    </div>
+                  )}
                 </Row>
               </Col>
             ))}

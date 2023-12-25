@@ -1,10 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-
-// todo: add dynamic prices
 
 export default function Cart({
   orders,
@@ -88,41 +83,37 @@ export default function Cart({
   ) : orders.length == 0 ? (
     <div className="cart-status">Der Warenkorb ist leer.</div>
   ) : (
-    <div>
+    <div className="cart-container">
       <form onSubmit={handleFormSubmit}>
         <h2>Meine Bestellung</h2>
-        <Container>
-          <Row className="justify-content-md-center overview-wines-row">
-            {orders.map((order, index) => (
-              <div key={order.wine_id}>
-                {wines
-                  .filter((wine) => wine._id == order.wine_id)
-                  .map((wine) => (
-                    <div key={wine._id}>
-                      <Col key={wine._id} xs="12" sm="6">
-                        <label className="bold">{wine.name}</label>
-                      </Col>
-                      <Col key={index} xs="12" sm="6">
-                        <input
-                          type="number"
-                          name={`amount_${wine._id}`}
-                          defaultValue={order.amount}
-                          onChange={(event) =>
-                            changeAmount(wine._id, Number(event.target.value))
-                          }
-                        ></input>
-                        <p key={wine._id}>
-                          Preis: {wine.price * order.amount}€
-                        </p>
-                      </Col>
+        <div>
+          {orders.map((order, index) => (
+            <div key={order.wine_id}>
+              {wines
+                .filter((wine) => wine._id == order.wine_id)
+                .map((wine) => (
+                  <div key={wine._id}>
+                    <div>
+                      <label className="bold centered">{wine.name}</label>
                     </div>
-                  ))}
-              </div>
-            ))}
-            <p className="gesamtpreis">Gesamtpreis: {totalPrice}€</p>
-          </Row>
+                    <div>
+                      <input
+                        type="number"
+                        name={`amount_${wine._id}`}
+                        defaultValue={order.amount}
+                        onChange={(event) =>
+                          changeAmount(wine._id, Number(event.target.value))
+                        }
+                      ></input>
+                      <p key={wine._id}>Preis: {wine.price * order.amount}€</p>
+                    </div>
+                  </div>
+                ))}
+            </div>
+          ))}
+          <p className="gesamtpreis">Gesamtpreis: {totalPrice}€</p>
           <button type="submit">Bestellung aufgeben</button>
-        </Container>
+        </div>
       </form>
     </div>
   );
