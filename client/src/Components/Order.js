@@ -52,7 +52,10 @@ export default function Order({ user_id, wines, state }) {
                     )
                   );
                 })}
-                <button className="delete-order-button" onClick={() => deleteOrder(order._id)}>
+                <button
+                  className="small-button"
+                  onClick={() => deleteOrder(order._id)}
+                >
                   Bestellung löschen
                 </button>
               </span>

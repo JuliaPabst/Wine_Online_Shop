@@ -89,14 +89,16 @@ export default function Register({
           <label>Vorname</label>
           <input
             type="text"
+            className="input-signIn-register"
             onChange={(e) => setFirstName(e.target.value)}
             required
           ></input>
         </div>
-        <div>
+        <div className="register-element">
           <label>Nachname</label>
           <input
             type="text"
+            className="input-signIn-register"
             onChange={(e) => setLastName(e.target.value)}
             required
           ></input>
@@ -105,12 +107,16 @@ export default function Register({
           <label>Postleitzahl</label>
           <input
             type="number"
+            className="input-signIn-register"
             onChange={(e) => setZIPCode(e.target.value)}
             required
           ></input>
+        </div>
+        <div className="register-element">
           <label>Stadt</label>
           <input
             type="text"
+            className="input-signIn-register"
             onChange={(e) => setCity(e.target.value)}
             required
           ></input>
@@ -119,33 +125,40 @@ export default function Register({
           <label>Straße</label>
           <input
             type="text"
+            className="input-signIn-register"
             onChange={(e) => setStreet(e.target.value)}
             required
           ></input>
           <label>Hausnummer</label>
           <input
             type="text"
+            className="input-signIn-register"
             onChange={(e) => setHouseNumber(e.target.value)}
             required
           ></input>
-          <label>Wohnungsnummer</label>
-          <input
-            type="text"
-            onChange={(e) => setFlatNumber(e.target.value)}
-          ></input>
+          <div className="register-element">
+            <label>Wohnungsnummer</label>
+            <input
+              type="text"
+              className="input-signIn-register"
+              onChange={(e) => setFlatNumber(e.target.value)}
+            ></input>
+          </div>
         </div>
         <div>
           <label>Email</label>
           <input
             type="email"
+            className="input-signIn-register"
             onChange={(e) => changeEmail(e.target.value)}
             required
           ></input>
         </div>
-        <div>
+        <div className="register-element">
           <label>Passwort</label>
           <input
             type="password"
+            className="input-signIn-register"
             onChange={(e) => changePassword(e.target.value)}
             required
           ></input>

@@ -39,23 +39,23 @@ export default function SignIn({
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <Container>
-          <div>
-            <label>Email: </label>
-            <input
-              type="email"
-              onChange={(e) => changeEmail(e.target.value)}
-            ></input>
-          </div>
-          <div>
-            <label>Passwort: </label>
-            <input
-              type="password"
-              onChange={(e) => changePassword(e.target.value)}
-            ></input>
-          </div>
-        </Container>
-        <button type="submit">Senden</button>
+        <div>
+          <label>Email: </label>
+          <input
+            type="email"
+            className="input-signIn-register"
+            onChange={(e) => changeEmail(e.target.value)}
+          ></input>
+        </div>
+        <div>
+          <label>Passwort: </label>
+          <input
+            type="password"
+            className="input-signIn-register"
+            onChange={(e) => changePassword(e.target.value)}
+          ></input>
+        </div>
+        <button className="small-button" type="submit">Senden</button>
       </form>
     </div>
   );

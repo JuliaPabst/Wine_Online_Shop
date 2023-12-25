@@ -46,6 +46,11 @@ button {
   font-weight: 600;
 }
 
+.small-button {
+  font-size: 18px;
+  padding: 5px 15px;
+}
+
 /* Header */
 
 .navbar {
@@ -104,10 +109,17 @@ button {
   margin-bottom: 50px;
 }
 
-.delete-order-button {
-  font-size: 18px;
-}
-
 .order-number {
   font-size: 30px;
+}
+
+/* Sign in and register */
+
+.input-signIn-register {
+  display: block;
+  margin: auto;
+}
+
+.register-element {
+  margin-bottom: 30px;
 }
