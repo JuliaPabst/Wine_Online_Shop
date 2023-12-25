@@ -8,7 +8,7 @@ export default function header({
   orders,
 }) {
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar expand="lg">
       <Container>
         <Navbar.Brand href="#home">
           <button onClick={() => changeState("home")}>

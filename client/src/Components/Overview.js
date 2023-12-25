@@ -83,7 +83,7 @@ export default function Overview({
                     ></img>
                     {loggingStatus && (
                       <div>
-                        <label>Menge:</label>{" "}
+                        <label className="bold">Menge:</label>{" "}
                         <input
                           type="number"
                           name={`amount_${wine._id}`}
