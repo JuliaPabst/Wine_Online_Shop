@@ -17,6 +17,7 @@ export default function Order({ user_id, wines, state }) {
     setLoading(true);
   }, [state]);
 
+ 
   function deleteOrder(orderId) {
     fetch(`http://localhost:3000/api/orders/${orderId}`, {
       method: "DELETE",

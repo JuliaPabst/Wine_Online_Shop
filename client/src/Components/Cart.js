@@ -51,9 +51,6 @@ export default function Cart({
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("Order posted:", data);
-        console.log("hi");
-        console.log(user_id);
         changeOrders([]);
         changeOrderSubmitted(true);
         setTotalPrice(0);
